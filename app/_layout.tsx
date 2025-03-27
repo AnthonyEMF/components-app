@@ -6,18 +6,16 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
+// import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Text, View } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import ThemedView from "@/presentation/shared/ThemedView";
-import ThemedText from "@/presentation/shared/ThemedText";
 import { allRoutes } from "@/constants/Routes";
+import { StatusBar } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -51,6 +49,11 @@ export default function RootLayout() {
     <GestureHandlerRootView
       style={{ flex: 1, backgroundColor: backgroundColor }}
     >
+      <StatusBar
+        backgroundColor={backgroundColor}
+        barStyle={colorScheme === 'dark' ? "light-content" : "dark-content"}
+        translucent={false}
+      />
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         {/* Test de estilos con modo oscuro y claro */}
         {/* <ThemedView margin safe>
@@ -82,9 +85,7 @@ export default function RootLayout() {
             />
           ))}
         </Stack>
-        
-        <StatusBar style="auto"/>
-        
+
       </ThemeProvider>
     </GestureHandlerRootView>
   );
